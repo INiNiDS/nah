@@ -1,0 +1,10 @@
+error: 🚨 [NAH! DEPLOYMENT BLOCKED] Code quality gate triggered!
+       Element `blocked` is violating Clean Code standards.
+       Marker: `#[too_many_arguments]` -> Reason: this should fail in deployment mode.
+       Fix this violation before merging to production.
+ --> tests/fixtures/deploy_blocked.rs:4:1
+  |
+4 | / fn blocked(a: i32, b: i32, c: i32, d: i32) -> i32 {
+5 | |     a + b + c + d
+6 | | }
+  | |_^

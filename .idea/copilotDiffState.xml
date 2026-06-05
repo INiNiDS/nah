@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CopilotDiffPersistence">
+    <option name="pendingDiffs">
+      <map>
+        <entry key="$PROJECT_DIR$/README.md">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/README.md" />
+              <option name="updatedContent" value="# nah&#10;&#10;`nah` is a proc-macro crate for flagging clean-code and code-style violations at compile time.&#10;&#10;## What it does&#10;&#10;The crate provides a set of attribute macros that can be attached to functions, structs, enums, traits, and `impl` blocks.&#10;&#10;- In normal mode, the macro does not break the build; it emits a Cargo warning instead.&#10;- If the `DEPLOY=1` environment variable is set, the macro turns the violation into a hard compile error.&#10;- If `PROFILE=release`, the check is skipped and the annotated item is returned unchanged.&#10;&#10;## Supported attributes&#10;&#10;### Complexity &amp; metrics&#10;- `#[high_complexity]`&#10;- `#[arrow_anti_pattern]`&#10;- `#[too_many_arguments]`&#10;- `#[huge_item]`&#10;&#10;### Duplication&#10;- `#[duplicate]`&#10;- `#[have_duplicate_code]`&#10;- `#[copy_paste_programming]`&#10;&#10;### Code smells &amp; architecture&#10;- `#[spaghetti_code]`&#10;- `#[god_object]`&#10;- `#[dead_code_candidate]`&#10;- `#[no_needing_function]`&#10;- `#[premature_optimization]`&#10;- `#[magic_numbers]`&#10;- `#[temporary_field]`&#10;- `#[kiss_violation]`&#10;&#10;### Side effects &amp; clean functions&#10;- `#[side_effects]`&#10;- `#[output_arguments]`&#10;- `#[flag_argument]`&#10;&#10;### SOLID violations&#10;- `#[srp_violation]`&#10;- `#[ocp_violation]`&#10;- `#[lsp_violation]`&#10;- `#[isp_violation]`&#10;- `#[dip_violation]`&#10;&#10;### Psychological technical debt&#10;- `#[crutch]`&#10;- `#[broken_window]`&#10;- `#[boy_scout_fail]`&#10;&#10;## Installation&#10;&#10;Add the dependency to your `Cargo.toml`:&#10;&#10;```toml&#10;[dependencies]&#10;nah = &quot;0.1&quot;&#10;```&#10;&#10;## Usage example&#10;&#10;```rust&#10;use nah::too_many_arguments;&#10;&#10;#[too_many_arguments(&quot;Consider grouping parameters into a config struct&quot;)]&#10;pub fn render(&#10;    a: i32,&#10;    b: i32,&#10;    c: i32,&#10;    d: i32,&#10;) {&#10;    println!(&quot;{} {} {} {}&quot;, a, b, c, d);&#10;}&#10;```&#10;&#10;You can also use an attribute without a message:&#10;&#10;```rust&#10;use nah::spaghetti_code;&#10;&#10;#[spaghetti_code]&#10;fn legacy_parser() {}&#10;```&#10;&#10;## Build behavior&#10;&#10;### Development mode&#10;If `DEPLOY` is not set to `1`, compilation continues, but Cargo prints a warning like this:&#10;&#10;```text&#10;cargo:warning=[nah] Clean Code violation on `render`: `#[too_many_arguments]` -&gt; Reason: Consider grouping parameters into a config struct.&#10;```&#10;&#10;### Deployment mode&#10;If `DEPLOY=1`, compilation stops with an error and the build fails.&#10;&#10;```bash&#10;DEPLOY=1 cargo build&#10;```&#10;&#10;### Release mode&#10;If `PROFILE=release`, the macro returns the original item without warnings or errors.&#10;&#10;## Notes&#10;&#10;- The macro accepts an optional string message, for example: `#[kiss_violation(&quot;Too clever, simplify this code&quot;)]`.&#10;- The message is only used for diagnostics and does not affect code generation.&#10;- Supported items include `fn`, `struct`, `enum`, `trait`, and `impl`.&#10;&#10;## Tests&#10;&#10;This repository includes integration tests powered by `trybuild`.&#10;&#10;Run them with:&#10;&#10;```bash&#10;cargo test&#10;```&#10;&#10;## License&#10;&#10;MIT&#10;&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/tests/compile.rs">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/tests/compile.rs" />
+              <option name="updatedContent" value="struct DeployEnvGuard(Option&lt;std::ffi::OsString&gt;);&#10;&#10;impl DeployEnvGuard {&#10;    fn enable() -&gt; Self {&#10;        let previous = std::env::var_os(&quot;DEPLOY&quot;);&#10;        unsafe {&#10;            std::env::set_var(&quot;DEPLOY&quot;, &quot;1&quot;);&#10;        }&#10;        Self(previous)&#10;    }&#10;}&#10;&#10;impl Drop for DeployEnvGuard {&#10;    fn drop(&amp;mut self) {&#10;        match self.0.as_ref() {&#10;            Some(value) =&gt; unsafe {&#10;                std::env::set_var(&quot;DEPLOY&quot;, value)&#10;            },&#10;            None =&gt; unsafe {&#10;                std::env::remove_var(&quot;DEPLOY&quot;)&#10;            },&#10;        }&#10;    }&#10;}&#10;&#10;#[test]&#10;fn proc_macro_build_modes_are_covered() {&#10;    let tests = trybuild::TestCases::new();&#10;&#10;    tests.pass(&quot;tests/fixtures/pass.rs&quot;);&#10;&#10;    let _guard = DeployEnvGuard::enable();&#10;    tests.compile_fail(&quot;tests/fixtures/deploy_blocked.rs&quot;);&#10;}&#10;&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
