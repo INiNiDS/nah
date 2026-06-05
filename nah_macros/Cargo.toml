@@ -1,13 +1,13 @@
 [package]
 name = "nah_macros"
-version = "0.1.0"
-edition = "2024"
-license = "MIT"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
 description = "Pre-defined Clean Code violation markers for `nah` — the entire set of 24 attribute macros."
 
 [lib]
 proc-macro = true
 
 [dependencies]
-nah_core = { path = "../nah_core" }
+nah_core = { path = "../nah_core", version = "0.1.0" }
 proc-macro2 = "1.0"

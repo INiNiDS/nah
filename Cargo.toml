@@ -4,17 +4,21 @@ members = [
     "nah_core",
     "nah_macros",
 ]
-
-[package]
-name = "nah"
+[workspace.package]
 version = "0.1.0"
 edition = "2024"
 license = "MIT"
+
+[package]
+name = "nah"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
 description = "Compile-time Clean Code quality gates for Rust — re-exports nah_core and nah_macros."
 
 [dependencies]
-nah_core = { path = "nah_core" }
-nah_macros = { path = "nah_macros" }
+nah_core = { path = "nah_core", version = "0.1.0" }
+nah_macros = { path = "nah_macros", version = "0.1.0" }
 
 [dev-dependencies]
 trybuild = "1.0.111"
