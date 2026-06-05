@@ -1,15 +1,20 @@
+[workspace]
+members = [
+    ".",
+    "nah_core",
+    "nah_macros",
+]
+
 [package]
 name = "nah"
 version = "0.1.0"
 edition = "2024"
 license = "MIT"
-
-[lib]
-proc-macro = true
+description = "Compile-time Clean Code quality gates for Rust — re-exports nah_core and nah_macros."
 
 [dependencies]
-syn = {version = "2.0.117", features = ["full"]}
-quote = "1.0.45"
+nah_core = { path = "nah_core" }
+nah_macros = { path = "nah_macros" }
 
 [dev-dependencies]
 trybuild = "1.0.111"

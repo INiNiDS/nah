@@ -1,0 +1,11 @@
+[package]
+name = "nah_core"
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+description = "Core engine for `nah` — compile-time Clean Code quality gates. Provides process_gate() and define_gates! macro."
+
+[dependencies]
+proc-macro2 = "1.0"
+quote = "1.0.45"
+syn = {version = "2.0.117", features = ["full"]}
