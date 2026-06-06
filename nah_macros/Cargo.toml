@@ -9,5 +9,5 @@ description = "Pre-defined Clean Code violation markers for `nah` — the entire
 proc-macro = true
 
 [dependencies]
-nah_core = { path = "../nah_core", version = "0.1.1" }
+nah_core = { path = "../nah_core", version = "0.1.2" }
 proc-macro2 = "1.0"
