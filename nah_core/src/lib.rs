@@ -47,7 +47,7 @@ pub fn process_gate(
         );
         syn::Error::new_spanned(&input, error_msg).to_compile_error()
     } else {
-        println!(
+        eprintln!(
             "cargo:warning=[nah] Clean Code violation on `{}`: `#[{}]`{}.",
             ident_str, macro_name, custom_message
         );
